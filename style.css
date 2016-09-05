@@ -1,0 +1,55 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  max-width: 100%;
+  background: #111;
+/*  font-family: Lato, sans-serif;*/
+}
+
+h1{
+  text-align: center;
+  color : hsl(120,80%,100%);
+  font-weight: 1em;
+  font-family: Arial Black;
+}
+
+canvas {
+  border :solid 3px hsl(120,80%,50%);
+  width :960px;
+  height: 700px;
+  margin: 0 auto;
+}
+
+.commands{
+  text-align: center;
+  color:white;
+  font-weight: 1.5em;
+}
+
+.container {
+  min-height: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.green{
+color : hsl(120,80%,50%);
+}
+
+/*************************************** Responsive ***********************************/
+
+/*@media screen and (min-width: 720px) and (max-width: 1024px) and (min-height: 600px) and (max-height: 800px){
+
+  canvas {
+  width :640px;
+  height: 580px;
+}*/
