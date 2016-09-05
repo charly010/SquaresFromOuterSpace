@@ -1,7 +1,7 @@
 // Squares from outer space
 // License MIT
 // © 2014 Nate Wiley
-// @ 2016 Charles Delebecque
+// © 2016 Charles Delebecque
 
 
 // declaration de la fonction anonyme, pour isoler le code (securité)
