@@ -3,6 +3,8 @@
 // © 2014 Nate Wiley
 // © 2016 Charles Delebecque
 
+// source : https://codepen.io/natewiley/pen/EGyiF
+
 
 // declaration de la fonction anonyme, pour isoler le code (securité)
 // son argument est window
@@ -15,44 +17,36 @@ var Game = {
 // init = chargement - les paramètres de la fonction init - this = init, à l'intérieur de la fonction
 // init est une fonction __construct
 	init: function(){
-		this.c = document.getElementById("game"); // game = canvas / "c" pour canvas
-		this.c.width = this.c.width;
-		this.c.height = this.c.height;
-		this.ctx = this.c.getContext("2d"); // on recupère le context en 2d
-		this.color = "hsl(245,90%,10%)"; // la couleur du fond (init.color ?)
-		this.bullets = []; // c'est un tableau - pour les tirs du player
-		this.enemyBullets = []; // tirs ennemis
-		this.enemies = []; // les ennemis
-		this.particles = []; // les explosions des ennemis
-		this.bulletIndex = 0; // defaut 0
-		this.enemyBulletIndex = 0; // defaut 0
-		this.enemyIndex = 0; // defaut 0
-		this.particleIndex = 0; // defaut 0
-		this.maxParticles = 18;
-
-		this.maxEnemies = 11; //defaut 6 -- min 4 - max 24 avec systeme de gain de vie avec les points
-	
-		this.maxEnemiesMax = 32;
+		this.c                     = document.getElementById("game"); // game = canvas / "c" pour canvas
+		this.c.width               = this.c.width;// inutile, mais dans la source originale ?
+		this.c.height              = this.c.height;// inutile, mais dans la source originale ?
+		this.ctx                   = this.c.getContext("2d"); // on recupère le context en 2d
+		this.color                 = "hsl(245,90%,10%)"; // la couleur du fond (init.color ?)
+		this.bullets               = []; // c'est un tableau - pour les tirs du player
+		this.enemyBullets          = []; // tirs ennemis
+		this.enemies               = []; // les ennemis
+		this.particles             = []; // les explosions des ennemis
+		this.bulletIndex           = 0; // defaut 0
+		this.enemyBulletIndex      = 0; // defaut 0
+		this.enemyIndex            = 0; // defaut 0
+		this.particleIndex         = 0; // defaut 0
+		this.maxParticles          = 18;
+		this.maxEnemies            = 11; //defaut 6 -- min 4 - max 24 avec systeme de gain de vie avec les points
+		this.maxEnemiesMax         = 32;
 	//	this.maxEnemiesMax();
-
-		this.enemiesAlive = 0;
-		this.currentFrame = 0;
+		this.enemiesAlive          = 0;
+		this.currentFrame          = 0;
 	//	this.maxLives = 3;
 	//	this.life = 0;
 		this.binding(); // "liaison" renvoie à la fonction suivante
-		this.player = new Player(); // instanciation d'un nouvel objet -- renvoie a la ligne 206
-
-		this.score = 0; // defaut : 0
-
-		this.paused = false; //boleen
-		this.shooting = true; // tir automatique - defaut false
-		this.oneShot = false; // defaut false
-		this.isGameOver = false;
+		this.player                = new Player(); // instanciation d'un nouvel objet -- renvoie a la ligne 206
+		this.score                 = 0; // defaut : 0
+		this.paused                = false; //boleen
+		this.shooting              = true; // tir automatique - defaut false
+		this.oneShot               = false; // defaut false
+		this.isGameOver            = false;
 		//compatibilité navigateur et canvas, j'imagine
     	this.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame;
-		
-
-
 
 //boucle original, pour les ennemis
 // la boucle for est utilisé pour répété un cerntain nombre de fois une instruction
@@ -60,10 +54,7 @@ var Game = {
 			new Enemy();
 			this.enemiesAlive++;
 		}
-
-
 		// this.invincibleMode(2000); // on est invincible au lancement du jeu, en milliseconde, defaut 2000
-
 		this.loop();
 	},
 
@@ -91,43 +82,19 @@ var Game = {
 		}
 	},
 
-		keyPressed: function(e){
-		 if(e.keyCode === 38 || e.keyCode === 40){
-		// 	if(!Game.player.invincible  && !Game.oneShot){
-		// 		Game.player.shoot();
-		// 		Game.oneShot = true; //defaut true
-		// 	}
-		 	if(Game.isGameOver){
-		 		Game.init();
-		 	}
-  //     e.preventDefault();
-		 }
+	keyPressed: function(e){
+		if(e.keyCode === 38 || e.keyCode === 40){
+			if(Game.isGameOver){
+				Game.init();
+		}
+	 }
 	},
 
 	// pour trouver a quelle touche correspond quelle keycode
 	// http://www.asquare.net/javascript/tests/KeyCode.html
 	// 32 = barre d'espace
 
-
-	keyPressed: function(e){
-		// if(e.keyCode === 32 || e.keyCode === 40 || e.keyCode === 38){
-		// 	if(!Game.player.invincible  && !Game.oneShot){
-		// 		Game.player.shoot();
-		// 		Game.oneShot = true; //defaut true
-		// 	}
-		// 	if(Game.isGameOver){
-		// 		Game.init();
-		// 	}
-  //     e.preventDefault();
-		// }
-	},
-
 	buttonUp: function(e){
-		// if(e.keyCode === 32 || e.keyCode === 40 || e.keyCode === 38){
-		// 	Game.shooting = false; //defaut false
-		// 	Game.oneShot = false; //defaut false
-  //       e.preventDefault();
-		// }
 		if(e.keyCode === 37 || e.keyCode === 65){
 			Game.player.movingLeft = false;
 		}
@@ -137,9 +104,6 @@ var Game = {
 	},
 
 	buttonDown: function(e){
-		// if(e.keyCode === 32 || e.keyCode === 40 || e.keyCode === 38){
-		// 	Game.shooting = true; //defaut true - sinon on peu plus tiré
-		// }
 		if(e.keyCode === 37 || e.keyCode === 65){
 			Game.player.movingLeft = true;
 		}
@@ -161,7 +125,6 @@ var Game = {
 		}		
 		}
 	},
-
 
 	random: function(min, max){
     return Math.floor(Math.random() * (max - min) + min);
@@ -190,13 +153,12 @@ var Game = {
 	  },
 	   
 	pause: function(){
-			this.paused = true;
-	  },
+		this.paused = true;
+	},
 
 	unPause: function(){
-			this.paused = false;
-	  },
-
+		this.paused = false;
+	},
 
 	gameOver: function(){
 	  	this.isGameOver = true;
@@ -207,25 +169,24 @@ var Game = {
 	  	var message4 = 'Created by Charles Delebecque & Nate Wiley ';
 	  	this.pause();
 	  	this.ctx.fillStyle = "hsl(120,80%,50%)";
-		this.ctx.font = "bold 36px Arial Black, sans-serif";
+		this.ctx.font      = "bold 36px Arial Black, sans-serif";
 		this.ctx.fillText(message, this.c.width/2 - this.ctx.measureText(message).width/2, this.c.height/2 - 50);
 		this.ctx.fillStyle = "white";
-		this.ctx.font = "bold 24px Lato, sans-serif";
+		this.ctx.font      = "bold 24px Lato, sans-serif";
 		this.ctx.fillText(message2, this.c.width/2 - this.ctx.measureText(message2).width/2, this.c.height/2 + 2);
 		this.ctx.fillStyle = "hsl(120,80%,50%)";
-		this.ctx.font = "bold 18px Lato, sans-serif";
+		this.ctx.font      = "bold 18px Lato, sans-serif";
 		this.ctx.fillText(message3, this.c.width/2 - this.ctx.measureText(message3).width/2, this.c.height/2 + 50);
 // credits
 		this.ctx.fillStyle = "white";
-		this.ctx.font = "18px Lato, sans-serif";
+		this.ctx.font      = "18px Lato, sans-serif";
 		this.ctx.fillText(message4, this.c.width/2 - this.ctx.measureText(message4).width/2, this.c.height/2 + 230);
 	  },
 
 	updateScore: function(){
-		this.ctx.fillStyle = "white"; // defaut white
-	  	this.ctx.font = "20px Lato, sans-serif";
+		this.ctx.fillStyle = "white";
+	  	this.ctx.font      = "20px Lato, sans-serif";
 	  	this.ctx.fillText("Score: " + this.score, 11, 25);
-	//  this.ctx.fillText("Lives: " + (this.maxLives - this.life), 10, 50);
 	  },
   
 	// fonction importante  
@@ -271,11 +232,6 @@ var Game = {
 	}
 
 };
-
-
-
-
-
 
 var Player = function(){
 	this.width = 60; //60, remettre le tir bullet au milieu
@@ -336,28 +292,20 @@ Player.prototype.update = function(){
 	}
 };
 
-
 Player.prototype.shoot = function(){
 	Game.bullets[Game.bulletIndex] = new Bullet(this.x + this.width/3); // changer le position du canon - defaut 2
 	Game.bulletIndex++;
 };
 
-
-
-
-
-
 var Bullet = function(x){  
-	this.width = 24;
+	this.width  = 24;
 	this.height = 24;//18
-	this.x = x;
-	this.y = Game.c.height - 10; //defaut 10
-	this.vy = 11; // defaut 9
-	this.index = Game.bulletIndex; // par rapport à la fonction init
+	this.x      = x;
+	this.y      = Game.c.height - 10; //defaut 10
+	this.vy     = 11; // defaut 9
+	this.index  = Game.bulletIndex; // par rapport à la fonction init
 	this.active = true;
-//	this.color = "white";
-	this.color = "hsl(0,90%,100%)"; //defaut hsl(0,90%,90%)
-	
+	this.color  = "hsl(0,90%,100%)"; //defaut hsl(0,90%,90%)
 };
 
 
@@ -366,7 +314,6 @@ Bullet.prototype.draw = function(){
 	Game.ctx.fillRect(this.x, this.y, this.width, this.height);
 };
 
-
 Bullet.prototype.update = function(){
 	this.y -= this.vy;
 	if(this.y < 0){
@@ -374,30 +321,25 @@ Bullet.prototype.update = function(){
 	}
 };
 
-
-
 var Enemy = function(){
-	this.width = 50; //50
+	this.width  = 50; //50
 	this.height = 50; //50
-	this.x = Game.random(0, (Game.c.width - this.width));
-	this.y = Game.random(10, 40);
-	this.vy = Game.random(1, 3) * .1;
-	this.index = Game.enemyIndex;
+	this.x      = Game.random(0, (Game.c.width - this.width));
+	this.y      = Game.random(10, 40);
+	this.vy     = Game.random(1, 3) * .1;
+	this.index  = Game.enemyIndex;
 	Game.enemies[Game.enemyIndex] = this;
 	Game.enemyIndex++;
-	this.speed = Game.random(2, 7); // la vitesse des ennemis
+	this.speed         = Game.random(2, 7); // la vitesse des ennemis
 	this.shootingSpeed = Game.random(30, 200); // frequence de tirs ennemis - defaut (30, 100)
-	this.movingLeft = Math.random() < 0.5 ? true : false;
-	// this.color = "hsl("+ Game.random(0, 360) +", 90%, 20%)"; // defaut "hsl("+ Game.random(0, 360) +", 90%, 50%)"
-	this.color = "hsl(245,100%,50%)";
+	this.movingLeft    = Math.random() < 0.5 ? true : false;
+	this.color         = "hsl(245,100%,50%)";
 };
-
 
 Enemy.prototype.draw = function(){
 	Game.ctx.fillStyle = this.color;
 	Game.ctx.fillRect(this.x, this.y, this.width, this.height);
 };
-
 
 Enemy.prototype.update = function(){
 	if(this.movingLeft){
@@ -449,13 +391,13 @@ Enemy.prototype.shoot = function(){
 };
 
 var EnemyBullet = function(x, y, color){
-	this.width = 50; // 12 ou 50
+	this.width  = 50; // 12 ou 50
 	this.height = 50; // 54 ou 50
-	this.x = x;
-	this.y = y;
-	this.vy = 8;//6
-	this.color = "hsl("+ Game.random(0, 360) +", 90%, 50%)" //color;
-	this.index = Game.enemyBulletIndex;
+	this.x      = x;
+	this.y      = y;
+	this.vy     = 8;//6
+	this.color  = "hsl("+ Game.random(0, 360) +", 90%, 50%)" //color;
+	this.index  = Game.enemyBulletIndex;
 	Game.enemyBullets[Game.enemyBulletIndex] = this;
 	Game.enemyBulletIndex++;
 };
@@ -472,29 +414,27 @@ EnemyBullet.prototype.update = function(){
 	}
 };
 
-
-
-
-var Particle = function(x, y, color){
-    this.x = x;
-    this.y = y;
-    this.vx = Game.random(-5, 5);
-    this.vy = Game.random(-5, 5);
+// todo supprimmer l'argument "color" qui ici est la couleur de fond
+var Particle   = function(x, y, color){
+    this.x     = x;
+    this.y     = y;
+    this.vx    = Game.random(-5, 5);
+    this.vy    = Game.random(-5, 5);
     // this.color = color || "orange";
     this.color = "hsl("+ Game.random(0, 360) +", 90%, 50%)";
     Game.particles[Game.particleIndex] = this;
-    this.id = Game.particleIndex;
+    this.id  = Game.particleIndex;
     Game.particleIndex++;
-    this.life = 0; // 0
+    this.life    = 0; // 0
     this.gravity = .80; // .05
-    this.size = 60; // 40
+    this.size    = 60; // 40
     this.maxlife = 800; // 100
   }
 
   Particle.prototype.draw = function(){
-    this.x += this.vx;
-    this.y += this.vy;
-    this.vy += this.gravity;
+    this.x    += this.vx;
+    this.y    += this.vy;
+    this.vy   += this.gravity;
     this.size *= .89;
     Game.ctx.fillStyle = this.color;
     Game.ctx.fillRect(this.x, this.y, this.size, this.size);
