@@ -1,8 +1,17 @@
 
 (function(window){
+	/*
+	var gameDiv = document.getElementById('game')
+	var winWidth = window.screen.width - 600; // la largeur de l'écran
+	var winHeight = window.screen.height - 400; // hauteur ...
+	gameDiv.setAttribute("width", winWidth);
+	gameDiv.setAttribute("height", winHeight);
+	*/
 	var Game = {
 		init: function(){
 			this.c                     = document.getElementById("game"); // game = canvas / "c" pour canvas
+			//this.c.width               = winWidth;
+			//this.c.height              = winHeight;
 			this.c.width               = this.c.width;// inutile, mais dans la source originale ?
 			this.c.height              = this.c.height;// inutile, mais dans la source originale ?
 			this.ctx                   = this.c.getContext("2d");
