@@ -317,7 +317,7 @@
 		Game.enemies[Game.enemyIndex] = this;
 		Game.enemyIndex++;
 		this.speed         = Game.random(2, 7);
-		this.shootingSpeed = Game.random(30, 200); // frequence de tirs ennemis - defaut (30, 100)
+		this.shootingSpeed = Game.random(30, 150); // frequence de tirs ennemis - defaut (30, 100)
 		this.movingLeft    = Math.random() < 0.5 ? true : false;
 		this.color         = "hsl(245,100%,50%)";
 	};
