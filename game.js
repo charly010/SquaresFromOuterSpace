@@ -220,8 +220,8 @@
 	};
 
 	var Player = function(){
-		this.width = 60;
-		this.height = 30;
+		this.width = 48;
+		this.height = 24;
 		this.x = Game.c.width/2 - this.width/2;
 		this.y = Game.c.height - this.height;
 		this.movingLeft = false;
@@ -246,15 +246,6 @@
 	Player.prototype.draw = function(){
 		 Game.ctx.fillStyle = this.color;
 		 Game.ctx.fillRect(this.x, this.y, this.width, this.height);
-
-	//Pour en faire un triangle
-		// Game.ctx.beginPath();//On démarre un nouveau tracé
-		// Game.ctx.moveTo(this.x, this.y);//On se déplace au coin inférieur gauche
-		// Game.ctx.lineTo(this.x + this.width/2, Game.c.height); //defaut = (5, 10)
-		// Game.ctx.lineTo(this.x - this.width/2, Game.c.height); //defaut = (20, 20)
-		// Game.ctx.lineTo(this.x, this.y);//defaut = (10, 20)
-		// Game.ctx.fillStyle = this.color;
-		// Game.ctx.closePath();
 	};
 
 
@@ -279,13 +270,13 @@
 	};
 
 	Player.prototype.shoot = function(){
-		Game.bullets[Game.bulletIndex] = new Bullet(this.x + this.width/3);
+		Game.bullets[Game.bulletIndex] = new Bullet(this.x + this.width/4);
 		Game.bulletIndex++;
 	};
 
 	var Bullet = function(x){
 		this.width  = 24;
-		this.height = 24;//18
+		this.height = 24;
 		this.x      = x;
 		this.y      = Game.c.height - 10;
 		this.vy     = 11; // defaut 9
@@ -363,7 +354,7 @@
 		setTimeout(function(){
 			new Enemy();
 		  }, 2500);
-		} // Int = nb de temps q'un enemi detruit mais poour revenir (defaut=2000)
+		} // Int = nb de temps q'un enemi detruit met poour revenir (defaut=2000)
 	};
 
 	Enemy.prototype.explode = function(){
