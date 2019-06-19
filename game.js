@@ -299,8 +299,8 @@
 	};
 
 	var Enemy = function(){
-		this.width  = 50;
-		this.height = 50;
+		this.width  = 48; // 50
+		this.height = 48; // 50
 		this.x      = Game.random(0, (Game.c.width - this.width));
 		this.y      = Game.random(10, 40);
 		this.vy     = Game.random(1, 3) * .1;
@@ -368,8 +368,8 @@
 	};
 
 	var EnemyBullet = function(x, y, color){
-		this.width  = 50;
-		this.height = 50;
+		this.width  = 48; // 50
+		this.height = 48; // 50
 		this.x      = x;
 		this.y      = y;
 		this.vy     = 8;
