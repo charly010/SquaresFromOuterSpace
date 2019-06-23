@@ -25,8 +25,8 @@
 			this.enemyIndex            = 0;
 			this.particleIndex         = 0;
 			this.maxParticles          = 18;
-			this.maxEnemies            = 11;
-			this.maxEnemiesMax         = 32;
+			this.maxEnemies            = 8;
+			this.maxEnemiesMax         = 24;
 			this.enemiesAlive          = 0;
 			this.currentFrame          = 0;
 			//	this.maxLives = 3;
@@ -156,7 +156,6 @@
 			var message = "GAME OVER";
 			var message2 = "Your score: " + Game.score;
 			var message3 = "Press Up or Down arrow key to Play Again";
-			//var message4 = 'Created by Charles Delebecque & Nate Wiley ';
 			this.pause();
 			this.ctx.fillStyle = "hsl(120,80%,50%)";
 			this.ctx.font      = "bold 36px Arial Black, sans-serif";
@@ -167,10 +166,6 @@
 			this.ctx.fillStyle = "hsl(120,80%,50%)";
 			this.ctx.font      = "bold 18px Lato, sans-serif";
 			this.ctx.fillText(message3, this.c.width/2 - this.ctx.measureText(message3).width/2, this.c.height/2 + 50);
-	// credits
-			this.ctx.fillStyle = "white";
-			this.ctx.font      = "18px Lato, sans-serif";
-			this.ctx.fillText(message4, this.c.width/2 - this.ctx.measureText(message4).width/2, this.c.height/2 + 230);
 		  },
 
 		updateScore: function(){
@@ -353,8 +348,8 @@
 		Game.enemiesAlive++;
 		setTimeout(function(){
 			new Enemy();
-		  }, 2500);
-		} // Int = nb de temps q'un enemi detruit met poour revenir (defaut=2000)
+		}, 2000);
+		}
 	};
 
 	Enemy.prototype.explode = function(){
